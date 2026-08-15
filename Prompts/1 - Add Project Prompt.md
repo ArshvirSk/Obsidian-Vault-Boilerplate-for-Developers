@@ -47,6 +47,9 @@ type: project
 stack: [detected stack, as a YAML list]
 repo-url: {detected repo URL}
 started: {detected or estimated date, YYYY-MM-DD}
+last-dependency-check: {today's date, YYYY-MM-DD}
+client-work: {true if evidence suggests this is freelance/client work — e.g. README mentions 
+  a client name, contract, or the repo structure implies external delivery — otherwise false}
 tags: [project]
 ---
 
@@ -64,6 +67,20 @@ tags: [project]
 ## 📐 Architecture
 > Real structure: key folders/modules, data flow. Cite actual paths.
 
+## 🏁 Milestones
+- {today's date, YYYY-MM-DD}: Added to vault
+- (add any other real milestones evidenced by git tags, release notes, or README — e.g. a 
+  "v1.0" tag, a CHANGELOG entry — otherwise leave just the one line above)
+
+## 🚀 Deployment
+- Live URL: (check README/package.json/deployment config for a real one, else leave blank)
+- Hosting: (detect from config files — vercel.json, netlify.toml, Dockerfile, etc. — else blank)
+- Env setup notes: (only if a .env.example or setup doc exists with real detail — else blank)
+
+## 🤝 Client context
+> Leave this whole section blank unless `client-work: true` above — don't fabricate.
+- 
+
 ## ✅ Tasks
 - [ ] (leave empty unless an obvious in-progress TODO is worth surfacing)
 
@@ -78,6 +95,7 @@ tags: [project]
 ## 🔗 Related
 - ADRs: none yet
 - Snippets used: none yet
+- Retros: none yet
 - Area: none yet
 - Similar stack: none yet
 - Repo: {repo URL}
@@ -126,7 +144,10 @@ Skip entirely if nothing evidenced.
 
 ### Step 5 — Find real reusable snippets
 Non-trivial, genuinely reusable, not boilerplate. Max 5. Check `{VAULT_PATH}\03-Resources\` 
-first — if a similar one exists, add this project to its "Used in" instead of duplicating.
+first — if a similar one exists, add this project to its "Used in" instead of duplicating. 
+Also check if any *other* existing snippet solves a genuinely similar problem (even in a 
+different language) — if so, link both ways under a `## Related snippets` section instead of 
+treating them as unrelated.
 
 New snippets: `{VAULT_PATH}\03-Resources\<snippet-name>.md`:
 
@@ -151,6 +172,9 @@ created: {today's date, YYYY-MM-DD}
 
 ## Usage / gotchas
 - 
+
+## Related snippets
+- (link genuinely similar snippets found above, or leave blank)
 
 ## Used in
 - [[{PROJECT_NAME}]]

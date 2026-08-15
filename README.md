@@ -1,4 +1,4 @@
-# Obsidian Vault Boilerplate for Developers
+# Dev-Brain — Obsidian Vault Boilerplate for Developers
 
 A ready-to-use Obsidian vault structure for developers, built around vibe-coding with AI 
 agents (Antigravity, Claude Code, Cursor, etc.). Documentation is generated as a side effect 
@@ -48,7 +48,7 @@ of your normal coding sessions, not a separate chore.
 04-Archive/     Dead/completed projects
 Attachments/    Images, files pasted into notes
 Templates/      All note templates (Templater-powered)
-Prompts/        The 4 AI-agent prompts — see below
+Prompts/        The AI-agent prompts — see below
 ```
 
 Each project lives as: `01-Projects/<ProjectName>/<ProjectName>.md` plus any 
@@ -61,32 +61,39 @@ Each project lives as: `01-Projects/<ProjectName>/<ProjectName>.md` plus any
 | Template | Use for |
 |---|---|
 | Daily Note | Your day-to-day scratchpad — commands, thoughts, quick log |
-| Project Note | One per project — overview, stack, architecture, log, related links |
+| Project Note | One per project — overview, stack, architecture, milestones, deployment, client context, log, related links |
 | ADR | A real architectural decision with trade-offs |
-| Snippet | A genuinely reusable piece of code |
-| Bug Log | A non-trivial bug — symptom, root cause, fix |
+| Snippet | A genuinely reusable piece of code, with related-snippet links |
+| Bug Log | A non-trivial bug — symptom, root cause, fix, links back to the ADR/bug that caused it |
 | Meeting Note | Notes/decisions/action items from a meeting |
 | Area | A recurring responsibility that spans multiple projects |
+| Retro | A milestone reflection — what worked, what you'd change, time estimate vs. reality |
 
 Insert any of these via `Ctrl/Cmd + P` → "Templater: Insert Template".
 
 ---
 
-## 4. The 3 AI-agent prompts (in `Prompts/`)
+## 4. The AI-agent prompts (in `Prompts/`)
 
 These are meant to be pasted into your coding agent (Antigravity, Claude Code, etc.), not 
-used inside Obsidian itself. Fill in `VAULT_PATH` and `PROJECT_NAME` at the top of each before 
-running.
+used inside Obsidian itself. Fill in `VAULT_PATH` (and `PROJECT_NAME` where required) at the 
+top of each before running.
 
-| # | Prompt | When to use | Frequency |
-|---|---|---|---|
-| 1 | **Add Project** | First time adding an existing project to the vault — writes the base note, ADRs, snippets, area, AND cross-links it to every other project with shared stack, all in one pass | Once per project |
-| 2 | **Vibe Coding Session** | Paste at the start of every regular coding session — keeps the vault updated live as you work (logs, ADRs, snippets, bugs) | Every session |
-| 3 | **Vault Hygiene** | Occasional pass across the whole vault to catch drift — renamed stacks, broken/placeholder links, manually-edited frontmatter | Monthly-ish, optional |
+| # | Prompt | Scope | When to use | Frequency |
+|---|---|---|---|---|
+| 1 | **Add Project** | Per project | First time adding a project — writes the base note (incl. milestones/deployment/client-work fields), ADRs, snippets, area, AND cross-links it to every other project with shared stack | Once per project |
+| 2 | **Vibe Coding Session** | Per project | Paste at the start of every coding session — logs, ADRs, snippets, bugs (cross-linked to their cause), milestones, and offers to create a retro at real checkpoints | Every session |
+| 3 | **Vault Hygiene** | Whole vault | Occasional pass to catch drift — renamed stacks, broken/placeholder links, manually-edited frontmatter | Monthly-ish, optional |
+| 4 | **Retroactive Linking Migration** | Whole vault | **One-time.** Backfills bug↔ADR and snippet↔snippet links onto projects added before this linking existed | Once, then retire |
+| 5 | **Betterment Fields Migration** | Whole vault | **One-time.** Backfills Milestones/Deployment/Client Context/dependency-check onto projects added before these fields existed | Once, then retire |
 
 **Typical flow for a new project:** run Prompt 1 once, from inside that project's repo.
 **Typical flow for ongoing work:** paste Prompt 2 at the start of each session, then just code.
-**Occasionally:** run Prompt 3 once across the whole vault if something looks off.
+**Occasionally:** run Prompt 3 across the whole vault if something looks off.
+**If you're migrating an existing vault** (added projects before Prompts 4/5 existed): run 
+Prompt 5 then Prompt 4, once each, across the whole vault. After that, every new project 
+gets the full structure from Prompt 1 on day one — 4 and 5 have nothing left to do and can be 
+deleted from your `Prompts/` folder if you want to keep it lean.
 
 ---
 
@@ -113,6 +120,8 @@ zero manual upkeep:
 - Projects going stale — active but untouched 30+ days
 - Dormant / archived projects
 - Recent ADRs, open bugs, snippet library, areas, recent daily notes
+- Projects needing a dependency check (never checked, or 90+ days stale)
+- Recent retros, and all projects flagged as client work
 - A filterable "everything using stack X" query
 
 Open it and pin the tab, or install the community plugin **Homepage** to auto-open it on launch.

@@ -31,3 +31,7 @@ tags: [bug]
 
 ## Prevention
 > How do we stop this class of bug from happening again?
+
+## Related
+- Caused by / linked to: 
+- Similar bugs: 
